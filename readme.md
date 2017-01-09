@@ -1,3 +1,6 @@
-# Laravel Quickstart - Intermediate - Task List With Authentication
+# To Do List
 
-https://laravel.com/docs/5.2/quickstart-intermediate
+A task manager for people with deadline.
+
+*This repository hosts the second assignment for Web Technology.*
+
