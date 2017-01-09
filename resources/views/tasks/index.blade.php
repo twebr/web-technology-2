@@ -46,18 +46,6 @@
                 </div>
             </div>
 
-            <!-- Current Tasks -->
-            @if (count($tasks_today) > 0)
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Current Tasks
-                    </div>
-
-                    <div class="panel-body">
-
-                    </div>
-                </div>
-            @endif
 
             <div class="panel panel-default">
                 <div class="panel-heading">
