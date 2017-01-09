@@ -24,6 +24,13 @@
         .fa-btn {
             margin-right: 6px;
         }
+
+        .table>tbody>tr>td {
+            vertical-align: middle;
+        }
+        .table tbody tr:first-of-type td {
+            border-top: none;
+        }
     </style>
 </head>
 <body id="app-layout">

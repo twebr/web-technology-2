@@ -54,40 +54,113 @@
                     </div>
 
                     <div class="panel-body">
-                        <table class="table table-striped task-table">
-                            <thead>
-                                <th>Due today</th>
-                                <th>&nbsp;</th>
-                            </thead>
-                            <tbody>
-                                @foreach ($tasks_today as $task)
-                                    <tr>
-                                        <!-- Task name -->
-                                        <td class="table-text"><div>{{ $task->name }}</div></td>
 
-                                        <!-- Task deadline -->
-                                        <td class="table-text"><div>{{ date('D d F Y', strtotime($task->deadline)) }}</div></td>
-
-                                        <!-- Task Delete Button -->
-                                        <td>
-                                            <form action="{{url('task/' . $task->id)}}" method="POST">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
-
-                                                <button type="submit" id="delete-task-{{ $task->id }}" class="btn btn-danger">
-                                                    <i class="fa fa-btn fa-trash"></i>Delete
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             @endif
-        </div>
-    </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Current tasks
+                </div>
+                <div class="panel-body">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation"><a href="#past" aria-controls="home" role="tab" data-toggle="tab">Past</a></li>
+                        <li role="presentation" class="active"><a href="#today" aria-controls="profile" role="tab" data-toggle="tab">Today</a></li>
+                        <li role="presentation"><a href="#future" aria-controls="messages" role="tab" data-toggle="tab">Later</a></li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane" id="past">
+                            <table class="table table-striped task-table">
+                                <tbody>
+                                    @foreach ($tasks_past as $task)
+                                        <tr>
+                                            <!-- Task name -->
+                                            <td class="table-text"><div>{{ $task->name }}</div></td>
+
+                                            <!-- Task deadline -->
+                                            <td class="table-text"><div>{{ date('j M Y', strtotime($task->deadline)) }}</div></td>
+
+                                            <!-- Task Delete Button -->
+                                            <td class="text-right">
+                                                <form action="{{url('task/' . $task->id)}}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('DELETE') }}
+
+                                                    <button type="submit" id="delete-task-{{ $task->id }}" class="btn btn-primary">
+                                                        <i class="fa fa-check" aria-hidden="true"></i> Done
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane active" id="today">
+                            <table class="table table-striped task-table">
+                                <tbody>
+                                    @foreach ($tasks_today as $task)
+                                        <tr>
+                                            <!-- Task name -->
+                                            <td class="table-text"><div>{{ $task->name }}</div></td>
+
+
+
+                                            <!-- Task Delete Button -->
+                                            <td class="text-right">
+                                                <form action="{{url('task/' . $task->id)}}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('DELETE') }}
+
+                                                    <button type="submit" id="delete-task-{{ $task->id }}" class="btn btn-primary">
+                                                        <i class="fa fa-check" aria-hidden="true"></i> Done
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="future">
+                            <table class="table table-striped task-table">
+                                <tbody>
+                                    @foreach ($tasks_future as $task)
+                                        <tr>
+                                            <!-- Task name -->
+                                            <td class="table-text"><div>{{ $task->name }}</div></td>
+
+                                            <!-- Task deadline -->
+                                            <td class="table-text"><div>{{ date('j M Y', strtotime($task->deadline)) }}</div></td>
+
+                                            <!-- Task Delete Button -->
+                                            <td class="text-right">
+                                                <form action="{{url('task/' . $task->id)}}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('DELETE') }}
+
+                                                    <button type="submit" id="delete-task-{{ $task->id }}" class="btn btn-primary">
+                                                        <i class="fa fa-check" aria-hidden="true"></i> Done
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><!-- closing .tab-content-->
+                </div><!-- closing .panel-body -->
+            </div><!-- closing .panel -->
+
+        </div><!-- closing .col -->
+    </div><!-- closing .container -->
 
 
 
