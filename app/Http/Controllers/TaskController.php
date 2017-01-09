@@ -10,6 +10,10 @@ use App\Http\Controllers\Controller;
 use App\Task;
 use App\Repositories\TaskRepository;
 
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
+
+
 class TaskController extends Controller
 {
     /**
@@ -55,10 +59,14 @@ class TaskController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:255',
+            'deadline' => 'required|date-format:"d-m-Y"'
         ]);
+
+        // Log::info('Showing user profile for user: '.strtotime($request->deadline));
 
         $request->user()->tasks()->create([
             'name' => $request->name,
+            'deadline' => Carbon::createFromFormat('d-m-Y', $request->deadline),
         ]);
 
         return redirect('/tasks');

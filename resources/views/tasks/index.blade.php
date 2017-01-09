@@ -21,7 +21,16 @@
                             <label for="task-name" class="col-sm-3 control-label">Task</label>
 
                             <div class="col-sm-6">
-                                <input type="text" name="name" id="task-name" class="form-control" value="{{ old('task') }}">
+                                <input type="text" name="name" id="task-name" class="form-control" value="{{ old('name') }}">
+                            </div>
+                        </div>
+
+                        <!-- Task Deadline -->
+                        <div class="form-group">
+                            <label for="task-deadline" class="col-sm-3 control-label">Deadline</label>
+
+                            <div class="col-sm-6">
+                                <input type="text" name="deadline" id="task-deadline" class="form-control" value="{{ old('deadline') }}">
                             </div>
                         </div>
 
@@ -53,7 +62,11 @@
                             <tbody>
                                 @foreach ($tasks as $task)
                                     <tr>
+                                        <!-- Task name -->
                                         <td class="table-text"><div>{{ $task->name }}</div></td>
+
+                                        <!-- Task deadline -->
+                                        <td class="table-text"><div>{{ date('D d F Y', strtotime($task->deadline)) }}</div></td>
 
                                         <!-- Task Delete Button -->
                                         <td>
@@ -75,4 +88,22 @@
             @endif
         </div>
     </div>
+
+
+
+
+@endsection
+
+@section('scripts')
+
+    <script type="text/javascript" src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+    <script type="text/javascript">
+    $('#task-deadline').datepicker({
+        format: "dd-mm-yyyy",
+        todayHighlight: true,
+        weekStart: 1
+    });
+
+    </script>
+
 @endsection
