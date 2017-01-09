@@ -44,8 +44,34 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
+        $today = Carbon::today();
+
+        $tasks_for_user = $this->tasks->forUser($request->user());
+
+        $tasks_today = [];
+        $tasks_past = [];
+        $tasks_future = [];
+
+        $today = Carbon::today()->format('Y-m-d');
+
+        foreach($tasks_for_user as $task) {
+            $deadline = $task->deadline->format('Y-m-d');
+
+            // var_dump($task->deadline);
+
+            if ($deadline == $today) {
+                $tasks_today[] = $task;
+            } else if ($deadline < $today) {
+                $tasks_past[] = $task;
+            } else {
+                $tasks_future[] = $task;
+            }
+        }
+
         return view('tasks.index', [
-            'tasks' => $this->tasks->forUser($request->user()),
+            'tasks_today' => $tasks_today,
+            'tasks_past' => $tasks_past,
+            'tasks_future' => $tasks_future,
         ]);
     }
 
@@ -64,9 +90,11 @@ class TaskController extends Controller
 
         // Log::info('Showing user profile for user: '.strtotime($request->deadline));
 
+        // The slash in the createFromFormat ensures that unknown fields are set to 0
+        // see http://php.net/manual/en/datetime.createfromformat.php
         $request->user()->tasks()->create([
             'name' => $request->name,
-            'deadline' => Carbon::createFromFormat('d-m-Y', $request->deadline),
+            'deadline' => Carbon::createFromFormat('d-m-Y|', $request->deadline),
         ]);
 
         return redirect('/tasks');

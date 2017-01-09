@@ -47,7 +47,7 @@
             </div>
 
             <!-- Current Tasks -->
-            @if (count($tasks) > 0)
+            @if (count($tasks_today) > 0)
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Current Tasks
@@ -56,11 +56,11 @@
                     <div class="panel-body">
                         <table class="table table-striped task-table">
                             <thead>
-                                <th>Task</th>
+                                <th>Due today</th>
                                 <th>&nbsp;</th>
                             </thead>
                             <tbody>
-                                @foreach ($tasks as $task)
+                                @foreach ($tasks_today as $task)
                                     <tr>
                                         <!-- Task name -->
                                         <td class="table-text"><div>{{ $task->name }}</div></td>
