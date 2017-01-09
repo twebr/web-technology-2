@@ -19,6 +19,7 @@
     <style>
         body {
             font-family: 'Fira Sans', sans-serif;
+            background-color: #999;
         }
 
         .fa-btn {
